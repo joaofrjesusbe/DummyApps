@@ -8,7 +8,7 @@ struct PromoCodeFieldView: View {
     
     var body: some View {
         FormField(
-            label: NSLocalizedString("field_promo", comment: ""),
+            label: NSLocalizedString("field_promo", bundle: .module, comment: ""),
             error: error
         ) {
             TextField("", text: $text)

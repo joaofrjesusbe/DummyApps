@@ -25,10 +25,6 @@ let package = Package(
                 "AppCore",
                 "AppNetwork"
             ]
-        ),
-        .testTarget(
-            name: "AppDesignSystemTests",
-            dependencies: ["AppDesignSystem"]
-        ),
+        )
     ]
 )

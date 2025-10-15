@@ -1,0 +1,65 @@
+{
+  "configurations" : [
+    {
+      "id" : "B46A464E-5DB3-4752-B348-DA2B967DE5E1",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:DummyJson.xcodeproj",
+      "identifier" : "EBE526A62E9EB4C000442681",
+      "name" : "DummyJson"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..\/AppDomains",
+        "identifier" : "AppListTests",
+        "name" : "AppListTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/AppDomains",
+        "identifier" : "AppFormTests",
+        "name" : "AppFormTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DummyJson.xcodeproj",
+        "identifier" : "EBE526B82E9EB4C200442681",
+        "name" : "DummyJsonTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/AppSDK\/AppGroup",
+        "identifier" : "AppGroupTests",
+        "name" : "AppGroupTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/AppSDK\/AppCore",
+        "identifier" : "AppCoreTests",
+        "name" : "AppCoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/AppSDK\/AppNetwork",
+        "identifier" : "AppNetworkTests",
+        "name" : "AppNetworkTests"
+      }
+    }
+  ],
+  "version" : 1
+}

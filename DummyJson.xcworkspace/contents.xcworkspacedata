@@ -26,4 +26,7 @@
    <FileRef
       location = "group:DummyJson/DummyJson.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:DummyUnitTests.xctestplan">
+   </FileRef>
 </Workspace>

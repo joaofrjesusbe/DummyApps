@@ -67,8 +67,9 @@ final class FormViewModelTests: XCTestCase {
         viewModel.formData.name = "John Doe"
         viewModel.formData.email = "john@example.com"
         viewModel.formData.phoneNumber = "1234567890"
-        viewModel.formData.promoCode = "ABC-123"
+        viewModel.formData.promoCode = "ABC-DEF"
         viewModel.formData.deliveryDate = calendar.date(byAdding: .day, value: -2, to: Date())!
+        viewModel.formData.classification = .good
         
         // Trigger validations
         viewModel.validateName()

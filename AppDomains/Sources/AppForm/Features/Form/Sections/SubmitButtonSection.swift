@@ -9,7 +9,7 @@ struct SubmitButtonSection: View {
             Button(action: action) {
                 HStack {
                     Spacer()
-                    Text(NSLocalizedString("submit_button", comment: ""))
+                    Text(NSLocalizedString("submit_button", bundle: .module, comment: ""))
                         .fontWeight(.semibold)
                     Spacer()
                 }

@@ -8,7 +8,7 @@ struct EmailFieldView: View {
     
     var body: some View {
         FormField(
-            label: NSLocalizedString("field_email", comment: ""),
+            label: NSLocalizedString("field_email", bundle: .module, comment: ""),
             error: error
         ) {
             TextField("", text: $text)

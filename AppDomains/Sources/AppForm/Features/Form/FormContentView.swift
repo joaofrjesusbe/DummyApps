@@ -19,7 +19,7 @@ struct FormContentView: View {
                     action: viewModel.submit
                 )
             }
-            .navigationTitle(NSLocalizedString("form_title", comment: ""))
+            .navigationTitle(NSLocalizedString("form_title", bundle: .module, comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: focusedField) { _, field in
                 if let field = field {

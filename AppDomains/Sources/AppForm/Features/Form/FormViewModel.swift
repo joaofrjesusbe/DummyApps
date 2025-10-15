@@ -46,7 +46,9 @@ class FormViewModel: ObservableObject {
             !data.name.isEmpty &&
             !data.email.isEmpty &&
             !data.phoneNumber.isEmpty &&
-            !data.promoCode.isEmpty
+            !data.promoCode.isEmpty &&
+            data.deliveryDate != nil &&
+            data.classification != nil
         }
         .assign(to: &$isSubmitEnabled)
     }
@@ -72,12 +74,17 @@ class FormViewModel: ObservableObject {
     }
     
     func submit() {
+        guard let deliveryDate = formData.deliveryDate,
+              let classification = formData.classification else {
+            return
+        }
+        
         print("Form submitted successfully!")
         print("Name: \(formData.name)")
         print("Email: \(formData.email)")
         print("Phone: \(formData.phoneNumber)")
         print("Promo: \(formData.promoCode)")
-        print("Date: \(formData.deliveryDate)")
-        print("Classification: \(formData.classification.localizedString)")
+        print("Date: \(deliveryDate)")
+        print("Classification: \(classification.localizedString)")
     }
 }

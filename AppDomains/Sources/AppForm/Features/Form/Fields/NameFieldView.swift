@@ -8,7 +8,7 @@ struct NameFieldView: View {
     
     var body: some View {
         FormField(
-            label: NSLocalizedString("field_name", comment: ""),
+            label: NSLocalizedString("field_name", bundle: .module, comment: ""),
             error: error
         ) {
             TextField("", text: $text)

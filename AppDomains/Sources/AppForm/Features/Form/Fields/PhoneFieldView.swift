@@ -8,7 +8,7 @@ struct PhoneFieldView: View {
     
     var body: some View {
         FormField(
-            label: NSLocalizedString("field_phone", comment: ""),
+            label: NSLocalizedString("field_phone", bundle: .module, comment: ""),
             error: error
         ) {
             TextField("", text: $text)

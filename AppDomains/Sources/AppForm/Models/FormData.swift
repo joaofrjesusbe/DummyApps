@@ -11,11 +11,11 @@ enum Classification: String, CaseIterable, Identifiable {
     
     var localizedString: String {
         switch self {
-            case .bad: return NSLocalizedString("classification_bad", comment: "")
-            case .satisfy: return NSLocalizedString("classification_satisfy", comment: "")
-            case .good: return NSLocalizedString("classification_good", comment: "")
-            case .veryGood: return NSLocalizedString("classification_very_good", comment: "")
-            case .excellent: return NSLocalizedString("classification_excellent", comment: "")
+            case .bad: return NSLocalizedString("classification_bad", bundle: .module, comment: "")
+            case .satisfy: return NSLocalizedString("classification_satisfy", bundle: .module, comment: "")
+            case .good: return NSLocalizedString("classification_good", bundle: .module, comment: "")
+            case .veryGood: return NSLocalizedString("classification_very_good", bundle: .module, comment: "")
+            case .excellent: return NSLocalizedString("classification_excellent", bundle: .module, comment: "")
         }
     }
 }
@@ -25,6 +25,6 @@ struct FormData {
     var email: String = ""
     var phoneNumber: String = ""
     var promoCode: String = ""
-    var deliveryDate: Date = Date()
-    var classification: Classification = .good
+    var deliveryDate: Date?
+    var classification: Classification?
 }

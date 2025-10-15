@@ -46,6 +46,9 @@ final class ValidatorTests: XCTestCase {
         let validator = DateValidator()
         let calendar = Calendar.current
         
+        // Test nil date
+        XCTAssertNotNil(validator.validate(nil))
+        
         // Test past date (not Monday)
         let pastDate = calendar.date(byAdding: .day, value: -7, to: Date())!
         let pastWeekday = calendar.component(.weekday, from: pastDate)

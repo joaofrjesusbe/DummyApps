@@ -28,6 +28,9 @@ let package = Package(
             dependencies: [
                 
             ],
+            resources: [
+                .process("Resources")
+            ]
         ),
         .target(
             name: "AppList",

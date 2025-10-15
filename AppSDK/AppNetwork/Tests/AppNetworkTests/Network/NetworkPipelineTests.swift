@@ -1,4 +1,4 @@
-@testable import PixabayNetwork
+@testable import AppNetwork
 import Foundation
 import Testing
 
