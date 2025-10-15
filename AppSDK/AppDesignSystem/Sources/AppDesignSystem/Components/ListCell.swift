@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct ListCell: View, Identifiable {
-    public let id: String
+    public let id: Int
     public let item: ListCellItem
     public let didSelect: () -> Void
     
@@ -48,7 +48,7 @@ public struct ListCell: View, Identifiable {
 #Preview {
     ListCell(
         item: ListCellItem(
-            id: "",
+            id: 3,
             title: "Title",
             description: "Description",
             rating: 3.0,

@@ -1,14 +1,14 @@
 import SwiftUI
 
-public struct ListCellItem: Identifiable, Equatable {
-    public let id: String
+public struct ListCellItem: Identifiable, Hashable {
+    public let id: Int
     public let title: String
     public let description: String
     public let rating: Double
     public let icon: URL?
     
     public init(
-        id: String,
+        id: Int,
         title: String,
         description: String,
         rating: Double,

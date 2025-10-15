@@ -12,7 +12,7 @@ public struct ListNavigation: View, NavigationRoutable {
                 .navigationDestination(for: ListRoute.self) { route in
                     switch route {
                     case .detail(let product):
-                        EmptyView()
+                        ProductDetailView(viewModel: ProductDetailViewModel(product: product))
                     }
                 }
         }        

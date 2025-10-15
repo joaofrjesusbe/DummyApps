@@ -17,8 +17,9 @@ extension ProductUIAdaptable {
 struct ProductUIAdapter: ProductUIAdaptable {
     
     func toCellItem(product: Product) -> ListCellItem {
-        ListCellItem(
-            id: String(product.id),
+        
+        return ListCellItem(
+            id: product.id,
             title: product.title,
             description: product.description,
             rating: product.rating,

@@ -14,8 +14,14 @@ struct ProductListView: View {
             }
             list
                 .navigationTitle("Products")
-                .alert("Error", isPresented: Binding(get: { viewModel.error != nil }, set: { _ in viewModel.error = nil })) {
-                    Button("OK", role: .cancel) { }
+                .alert("Error",
+                       isPresented: Binding(get: { viewModel.error != nil },
+                                            set: { _ in viewModel.error = nil }
+                                           )
+                ) {
+                    Button("OK", role: .cancel) {
+                        
+                    }
                 } message: {
                     Text(viewModel.error ?? "")
                 }
@@ -26,11 +32,14 @@ struct ProductListView: View {
     }
     
     var list: some View {
-        List(viewModel.filtered) { product in
-            ListCell(
-                item: adapter.toCellItem(product: product)) {
-                    navigate(.push(.detail(product: product)))
-                }
+        List() {
+            ForEach(viewModel.filtered, id: \.id) { product in
+                ListCell(
+                    item: adapter.toCellItem(product: product)) {
+                        navigate(.push(.detail(product: product)))
+                    }
+            }
+            
         }
         .listStyle(.plain)
     }

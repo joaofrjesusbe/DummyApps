@@ -14,8 +14,8 @@ let package = Package(
             targets: ["AppList"]
         ),
         .library(
-            name: "AppMain",
-            targets: ["AppMain"]
+            name: "AppForm",
+            targets: ["AppForm"]
         )
     ],
     dependencies: [
@@ -24,17 +24,16 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "AppMain",
+            name: "AppForm",
             dependencies: [
-                "AppGroup",
-                "AppList"
+                
             ],
         ),
         .target(
             name: "AppList",
             dependencies: [
                 "AppGroup",
-            ]
+            ],
         ),
         .testTarget(
             name: "AppListTests",
