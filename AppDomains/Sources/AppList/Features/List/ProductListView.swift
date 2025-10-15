@@ -19,8 +19,10 @@ struct ProductListView: View {
                                             set: { _ in viewModel.error = nil }
                                            )
                 ) {
-                    Button("OK", role: .cancel) {
-                        
+                    Button("Retry", role: .cancel) {
+                        Task { @MainActor in
+                            await viewModel.load()
+                        }
                     }
                 } message: {
                     Text(viewModel.error ?? "")

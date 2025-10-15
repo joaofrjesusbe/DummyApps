@@ -11,8 +11,13 @@ actor ProductsCache {
     private let indexURL: URL
     private let fm = FileManager.default
 
+    init(fileURL: URL, indexURL: URL) {
+        self.fileURL = fileURL
+        self.indexURL = indexURL
+    }
+
     init() {
-        let docs = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         self.fileURL = docs.appendingPathComponent("ProductCache.json")
         self.indexURL = docs.appendingPathComponent("ProductCache.index.json")
     }

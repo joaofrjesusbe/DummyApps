@@ -25,6 +25,8 @@ struct ProductDetailView: View {
             .padding()
         }
         //.navigationTitle("Details")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }

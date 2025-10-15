@@ -13,8 +13,11 @@ struct EmailFieldView: View {
         ) {
             TextField("", text: $text)
                 .textContentType(.emailAddress)
+                #if os(iOS)
                 .keyboardType(.emailAddress)
-                .autocapitalization(.none)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                #endif
                 .focused(focusedField, equals: .email)
                 .onChange(of: text) { _, _ in
                     onValidate()

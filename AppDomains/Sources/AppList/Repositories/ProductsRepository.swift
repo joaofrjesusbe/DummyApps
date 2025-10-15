@@ -4,12 +4,13 @@ import AppGroup
 @MainActor
 struct ProductsRepository: ProductsListProvidable {
     private var api: ProductsService
+    let cache: ProductsCache
     
-    public init(api: ProductsService) {
+    public init(api: ProductsService, cache: ProductsCache = ProductsCache()) {
         self.api = api
+        self.cache = cache
     }
     
-    let cache = ProductsCache()
     let pageSize = 100
 
     func bootstrap() async throws -> [Product] {
@@ -17,8 +18,9 @@ struct ProductsRepository: ProductsListProvidable {
         let cached = await cache.load()
         var index = await cache.loadIndex()
 
-        if let total = index.totalExpected, index.lastFetchedCount >= total, !cached.isEmpty {
-            return cached
+        if let total = index.totalExpected, !cached.isEmpty {
+            if index.lastFetchedCount >= total { return cached }
+            if cached.count >= total { return cached }
         }
 
         var products = cached

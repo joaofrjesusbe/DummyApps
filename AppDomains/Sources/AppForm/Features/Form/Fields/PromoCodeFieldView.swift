@@ -12,7 +12,10 @@ struct PromoCodeFieldView: View {
             error: error
         ) {
             TextField("", text: $text)
-                .autocapitalization(.allCharacters)
+                #if os(iOS)
+                .textInputAutocapitalization(.characters)
+                .autocorrectionDisabled()
+                #endif
                 .focused($focusedField, equals: .promo)
                 .onChange(of: text) { _, _ in
                     onValidate()

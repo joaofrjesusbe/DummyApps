@@ -13,7 +13,9 @@ struct PhoneFieldView: View {
         ) {
             TextField("", text: $text)
                 .textContentType(.telephoneNumber)
+                #if os(iOS)
                 .keyboardType(.numberPad)
+                #endif
                 .focused($focusedField, equals: .phone)
                 .onChange(of: text) { _, _ in
                     onValidate()

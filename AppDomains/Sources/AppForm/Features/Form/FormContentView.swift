@@ -20,7 +20,9 @@ struct FormContentView: View {
                 )
             }
             .navigationTitle(NSLocalizedString("form_title", bundle: .module, comment: ""))
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .onChange(of: focusedField) { _, field in
                 if let field = field {
                     withAnimation {

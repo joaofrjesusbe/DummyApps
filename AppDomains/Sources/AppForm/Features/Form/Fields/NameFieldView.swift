@@ -13,7 +13,9 @@ struct NameFieldView: View {
         ) {
             TextField("", text: $text)
                 .textContentType(.name)
-                .autocapitalization(.words)
+                #if os(iOS)
+                .textInputAutocapitalization(.words)
+                #endif
                 .focused($focusedField, equals: .name)
                 .onChange(of: text) { _, _ in
                     onValidate()

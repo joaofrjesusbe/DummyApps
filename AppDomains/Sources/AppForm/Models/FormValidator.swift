@@ -34,13 +34,13 @@ struct PromoCodeValidator: StringValidator {
         if value.isEmpty {
             return NSLocalizedString("error_empty", bundle: .module, comment: "")
         }
-        let allowedCharacters = CharacterSet.uppercaseLetters.union(CharacterSet(charactersIn: "-"))
-        let valueCharSet = CharacterSet(charactersIn: value)
-        
-        guard allowedCharacters.isSuperset(of: valueCharSet),
+        // Only ASCII uppercase letters A-Z and hyphen, 3–7 chars, no accents
+        let isValidCharset = value.allSatisfy { ch in
+            (ch >= "A" && ch <= "Z") || ch == "-"
+        }
+        guard isValidCharset,
               value.count >= 3,
-              value.count <= 7,
-              value.unicodeScalars.allSatisfy({ $0.value < 128 || CharacterSet.uppercaseLetters.contains($0) }) else {
+              value.count <= 7 else {
             return NSLocalizedString("error_promo", bundle: .module, comment: "")
         }
         return nil
