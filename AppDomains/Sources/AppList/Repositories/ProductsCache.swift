@@ -1,5 +1,4 @@
 import Foundation
-import AppGroup
 
 struct CacheIndex: Codable, Sendable {
     var lastFetchedCount: Int

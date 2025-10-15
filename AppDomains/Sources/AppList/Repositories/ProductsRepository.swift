@@ -1,5 +1,4 @@
 import Foundation
-import AppGroup
 
 @MainActor
 struct ProductsRepository: ProductsListProvidable {

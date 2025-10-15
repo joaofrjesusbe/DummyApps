@@ -4,7 +4,7 @@ import Nuke
 
 extension Container {
     var networkMode: Factory<NetworkMode> {
-        self { .auto }.singleton
+        self { .live }.singleton
     }
     
     var cassettePipelineFactory: Factory<CassettePipelineFactory> {
@@ -29,7 +29,7 @@ extension Container {
         .singleton
     }
     
-    var httpClient: Factory<HttpClientType> {
+    public var httpClient: Factory<HttpClientType> {
         self {
             guard let baseURL = URL(string: "https://dummyjson.com") else { fatalError("Bad baseURL") }
             return HttpClient(baseURL: baseURL, networkRequest: self.networkPipeline.resolve())

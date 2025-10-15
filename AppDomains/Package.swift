@@ -37,6 +37,9 @@ let package = Package(
             dependencies: [
                 "AppGroup",
             ],
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "AppListTests",

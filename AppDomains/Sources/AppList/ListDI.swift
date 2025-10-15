@@ -10,7 +10,7 @@ public struct ListDI {
     }
     
     static func setAsMock() {
-        let _ = Container.shared.productService.register { MockAPIService() }
+        let _ = Container.shared.productsService.register { MockProductsService() }
     }
 }
 
@@ -19,13 +19,13 @@ extension Container {
     @MainActor
     var listProvider: ProductsListProvidable {
         self { @MainActor in
-            ProductsRepository(api: self.productService.resolve())
+            ProductsRepository(api: self.productsService.resolve())
         }.singleton()
     }
     
     @MainActor
-    var productService: Factory<ProductsService> {
-        self { DummyAPIService() }
+    var productsService: Factory<ProductsService> {
+        self { NetworkProductsService() }
     }
     
     @MainActor

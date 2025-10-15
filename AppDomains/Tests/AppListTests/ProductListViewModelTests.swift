@@ -1,7 +1,6 @@
 import Testing
 import Foundation
 @testable import AppList
-import AppGroup
 
 @MainActor
 struct ProductListViewModelTests {
