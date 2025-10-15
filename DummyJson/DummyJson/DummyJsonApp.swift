@@ -10,7 +10,7 @@ struct DummyJsonApp: App {
             Group {
                 switch AppMode.current() {
                 case .form:
-                    ValidatedFormView()
+                    FormNavigation()
                 case .listAndDetail:
                     ListNavigation()
                 }

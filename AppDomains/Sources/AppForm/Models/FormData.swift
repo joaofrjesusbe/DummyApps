@@ -1,46 +1,48 @@
 import Foundation
 
-struct FormData {
+// TODO: Remove the Rating presentation from the model
+enum Rating: String, CaseIterable, Identifiable {
+    case bad = "Mau"
+    case satisfy = "Satisfatório"
+    case good = "Bom"
+    case average = "Muito Bom"
+    case excelent = "Excelente"
+    var id: String { rawValue }
+}
+
+struct FormModel: Equatable {
     var name: String = ""
     var email: String = ""
-    var number: String = ""
-    var promo: String = ""
-    var date: Date? = nil
-    var rating: FormRating = .excelent
+    var number: String = "" // digits only, is this a phone number?
+    var promotionalCode: String = "" // uppercase letters and hyphens only
+    var delivery: Date? = nil
+    var classification: Rating? = nil
 }
 
-enum FormRating: Int, CaseIterable {
-    case bad = 0
-    case satisfy
-    case good
-    case veryGood
-    case excelent
+struct FieldError: Identifiable, Equatable {
+    let id = UUID()
+    let message: String
+}
+
+struct FormErrors: Equatable {
+    var name: FieldError? = nil
+    var email: FieldError? = nil
+    var number: FieldError? = nil
+    var promotionalCode: FieldError? = nil
+    var delivery: FieldError? = nil
+    var classification: FieldError? = nil
     
-    var textDescription: String {
-        switch self {
-        case .bad: "Mau"
-        case .satisfy: "Satisfatório"
-        case .good: "Bom"
-        case .veryGood: "Muito Bom"
-        case .excelent: "Excelente"
-        }
-    }    
+    var all: [FieldError] {
+        [name, email, number, promotionalCode, delivery, classification].compactMap { $0 }
+    }
 }
 
-enum FormError: LocalizedError {
-    case empty(String)
-    case invalidEmail
-    case invalidNumber
-    case invalidPromo
-    case invalidDate(String)
-
-    var errorDescription: String? {
-        switch self {
-        case .empty(let f): return "\(f) can't be empty"
-        case .invalidEmail: return "Invalid email"
-        case .invalidNumber: return "Number must contain only digits"
-        case .invalidPromo: return "Promo code must be 3–7 chars, uppercase letters and hyphens only, no accents"
-        case .invalidDate(let r): return r
-        }
-    }
+// Tracks if the user interacted with a field (for runtime/dirty validation)
+struct FormTouched: Equatable {
+    var name = false
+    var email = false
+    var number = false
+    var promotionalCode = false
+    var delivery = false
+    var classification = false
 }
