@@ -16,9 +16,17 @@ actor ProductsCache {
     }
 
     init() {
-        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        self.fileURL = docs.appendingPathComponent("ProductCache.json")
-        self.indexURL = docs.appendingPathComponent("ProductCache.index.json")
+        let fm = FileManager.default
+        
+        let cachesRoot = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let cachesDir = cachesRoot.appendingPathComponent("AppList", isDirectory: true)
+        try? fm.createDirectory(at: cachesDir, withIntermediateDirectories: true)
+
+        let newFile = cachesDir.appendingPathComponent("ProductCache.json")
+        let newIndex = cachesDir.appendingPathComponent("ProductCache.index.json")
+
+        self.fileURL = newFile
+        self.indexURL = newIndex
     }
 
     func load() async -> [Product] {
