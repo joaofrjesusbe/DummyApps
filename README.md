@@ -1,4 +1,4 @@
-# DummyJSON iOS — AppList + AppForm
+# DummyApps iOS — AppList + AppForm
 
 **A small marathon of 2 days developing the requirements.**
 

@@ -12,6 +12,8 @@ public struct CollapsingHeaderImage: View {
         GeometryReader { geo in
             let y = geo.frame(in: .global).minY
             RemoteImage(url: url)
+                // Ensure image is pinned to the top-center instead of top-left
+                .frame(maxWidth: .infinity, alignment: .top)
                 .frame(height: max(minHeight, minHeight + y))
                 .clipped()
                 .offset(y: y < 0 ? y/2 : -y) // subtle parallax
