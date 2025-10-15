@@ -6,8 +6,6 @@
 
 Contributors:
 - Me
-- ChatGpt5 - Thinking (web + codex)
-- Claude (web Sonnet 4.5)
 
 ## Tech Requirements
 
@@ -73,9 +71,12 @@ Contributors:
 
 - Form feature is keyboard-safe and responsive across sizes.
 - Product list search is diacritic-insensitive and token-based.
-- AppDesignSystem only has UI generic components used by AppList. 
 
 ## Missing requirements
 
 - Only tested for iOS iPhone
 - Only support for English, although AppForm is ready for localization in PT
+- AppDesignSystem only has UI generic components used by AppList.
+- Form is not generic and for scalibility should use more generic approach.
+- NSLocalizedString should be extracted from the views, but for time constraints I didn't extracted.
+
