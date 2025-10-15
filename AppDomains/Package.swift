@@ -39,5 +39,9 @@ let package = Package(
             name: "AppListTests",
             dependencies: ["AppList"]
         ),
+        .testTarget(
+            name: "AppFormTests",
+            dependencies: ["AppForm"]
+        ),
     ]
 )

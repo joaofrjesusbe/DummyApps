@@ -1,13 +1,4 @@
-//
-//  ListNavigation.swift
-//  AppDomains
-//
-//  Created by Joao Jesus on 15/10/2025.
-//
-
-
 import SwiftUI
-import AppGroup
 
 public struct FormNavigation: View {
     
@@ -15,7 +6,7 @@ public struct FormNavigation: View {
     
     public var body: some View {
         NavigationStack() {
-            FormFeatureView()
+            FormView()
         }
     }
 }

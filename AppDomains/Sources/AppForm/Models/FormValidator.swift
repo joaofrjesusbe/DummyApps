@@ -1,81 +1,69 @@
 import Foundation
 
-final class FormValidator: FormValidating {
-    
-    private let emailRegex: NSRegularExpression = {
-        // A pragmatic email regex (not fully RFC5322) suitable for form validation
-        // Matches local@domain.tld with common characters
-        let pattern = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
-        return try! NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
-    }()
-        
-    func isValidEmail(_ email: String) -> Bool {
-        let range = NSRange(email.startIndex..<email.endIndex, in: email)
-        return emailRegex.firstMatch(in: email, options: [], range: range) != nil
+struct EmptyValidator: StringValidator {
+    func validate(_ value: String) -> String? {
+        value.trimmingCharacters(in: .whitespaces).isEmpty ?
+        NSLocalizedString("error_empty", comment: "") : nil
     }
-    
-    func sanitizeDigits(_ input: String) -> String {
-        input.filter { $0.isNumber }
+}
+
+struct EmailValidator: StringValidator {
+    func validate(_ value: String) -> String? {
+        if value.trimmingCharacters(in: .whitespaces).isEmpty {
+            return NSLocalizedString("error_empty", comment: "")
+        }
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return predicate.evaluate(with: value) ? nil :
+        NSLocalizedString("error_email", comment: "")
     }
-    
-    func sanitizePromo(_ input: String) -> String {
-        // Remove diacritics, force uppercase, keep only A-Z and hyphen, collapse consecutive hyphens
-        let folded = input.folding(options: [.diacriticInsensitive, .widthInsensitive, .caseInsensitive], locale: .current)
-        let upper = folded.uppercased()
-        let filtered = upper.filter { ($0 >= "A" && $0 <= "Z") || $0 == "-" }
-        // Remove leading/trailing hyphens and collapse multiples
-        let collapsed = filtered.replacingOccurrences(of: "-+", with: "-", options: .regularExpression)
-            .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
-        return collapsed
+}
+
+struct PhoneNumberValidator: StringValidator {
+    func validate(_ value: String) -> String? {
+        if value.isEmpty {
+            return NSLocalizedString("error_empty", comment: "")
+        }
+        return value.allSatisfy(\.isNumber) ? nil :
+        NSLocalizedString("error_phone", comment: "")
     }
-    
-    func validate(model: FormModel, now: Date = Date()) -> FormErrors {
-        var errors = FormErrors()
+}
+
+struct PromoCodeValidator: StringValidator {
+    func validate(_ value: String) -> String? {
+        if value.isEmpty {
+            return NSLocalizedString("error_empty", comment: "")
+        }
+        let allowedCharacters = CharacterSet.uppercaseLetters.union(CharacterSet(charactersIn: "-"))
+        let valueCharSet = CharacterSet(charactersIn: value)
         
-        if model.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            errors.name = FieldError(message: "O nome não pode estar vazio.")
+        guard allowedCharacters.isSuperset(of: valueCharSet),
+              value.count >= 3,
+              value.count <= 7,
+              value.unicodeScalars.allSatisfy({ $0.value < 128 || CharacterSet.uppercaseLetters.contains($0) }) else {
+            return NSLocalizedString("error_promo", comment: "")
+        }
+        return nil
+    }
+}
+
+struct DateValidator {
+    func validate(_ date: Date) -> String? {
+        let calendar = Calendar.current
+        
+        // Check if Monday
+        let weekday = calendar.component(.weekday, from: date)
+        if weekday == 2 { // Sunday = 1, Monday = 2
+            return NSLocalizedString("error_date_monday", comment: "")
         }
         
-        if model.email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            errors.email = FieldError(message: "O email não pode estar vazio.")
-        } else if !isValidEmail(model.email) {
-            errors.email = FieldError(message: "Formato de email inválido.")
+        // Check if future
+        let startOfToday = calendar.startOfDay(for: Date())
+        let startOfSelectedDay = calendar.startOfDay(for: date)
+        if startOfSelectedDay > startOfToday {
+            return NSLocalizedString("error_date_future", comment: "")
         }
         
-        if model.number.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            errors.number = FieldError(message: "O número não pode estar vazio.")
-        } else if !model.number.allSatisfy({ $0.isNumber }) {
-            errors.number = FieldError(message: "O número deve conter apenas dígitos.")
-        }
-        
-        let codigo = model.promotionalCode
-        if codigo.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            errors.promotionalCode = FieldError(message: "O código não pode estar vazio.")
-        } else {
-            let regex = try! NSRegularExpression(pattern: "^[A-Z-]{3,7}$")
-            let range = NSRange(codigo.startIndex..<codigo.endIndex, in: codigo)
-            let matches = regex.firstMatch(in: codigo, options: [], range: range) != nil
-            if !matches {
-                errors.promotionalCode = FieldError(message: "O código deve ter 3–7 caracteres, apenas letras maiúsculas e hífens, sem acentos.")
-            }
-        }
-        
-        if let date = model.delivery {
-            let cal = Calendar.current
-            if cal.component(.weekday, from: date) == 2 { // Monday = 2 in Gregorian
-                errors.delivery = FieldError(message: "A data não pode ser uma segunda-feira.")
-            }
-            if date > now {
-                errors.delivery = FieldError(message: "A data não pode estar no futuro.")
-            }
-        } else {
-            errors.delivery = FieldError(message: "A data não pode estar vazia.")
-        }
-    
-        if model.classification == nil {
-            errors.classification = FieldError(message: "Selecione uma classificação.")
-        }
-        
-        return errors
+        return nil
     }
 }
