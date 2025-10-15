@@ -6,9 +6,7 @@
 
 Contributors:
 - Me
-- ChatGpt5 - Thinking (web + codex)
-- Claude (web Sonnet 4.5)
-
+  
 ## Tech Requirements
 
 - Xcode 16+ (Swift 6 toolchain)
