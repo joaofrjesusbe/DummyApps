@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB753D482E9EC93B00FEB026 /* AppGroup in Frameworks */ = {isa = PBXBuildFile; productRef = EB753D472E9EC93B00FEB026 /* AppGroup */; };
+		EBC6EC5A2E9F1E2C0011F0E4 /* AppList in Frameworks */ = {isa = PBXBuildFile; productRef = EBC6EC592E9F1E2C0011F0E4 /* AppList */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC6EC5A2E9F1E2C0011F0E4 /* AppList in Frameworks */,
 				EB753D482E9EC93B00FEB026 /* AppGroup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +128,7 @@
 			name = DummyJson;
 			packageProductDependencies = (
 				EB753D472E9EC93B00FEB026 /* AppGroup */,
+				EBC6EC592E9F1E2C0011F0E4 /* AppList */,
 			);
 			productName = DummyJson;
 			productReference = EBE526A72E9EB4C000442681 /* DummyJson.app */;
@@ -591,6 +594,10 @@
 		EB753D472E9EC93B00FEB026 /* AppGroup */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppGroup;
+		};
+		EBC6EC592E9F1E2C0011F0E4 /* AppList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppList;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

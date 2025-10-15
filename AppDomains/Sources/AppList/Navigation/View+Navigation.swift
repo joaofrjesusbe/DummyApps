@@ -3,7 +3,7 @@ import AppGroup
 
 extension View {
     func onNavigate(_ action: @escaping NavigateAction<ListRoute>.Action) -> some View {
-        self.environment(\.imageNavigate, NavigateAction(action: action))
+        self.environment(\.listNavigate, NavigateAction(action: action))
     }
 }
 
@@ -12,7 +12,7 @@ struct DummyListNavigationEnvironmentKey: @preconcurrency EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var imageNavigate: (NavigateAction<DummyListRoute>) {
+    var listNavigate: (NavigateAction<ListRoute>) {
         get { self[DummyListNavigationEnvironmentKey.self] }
         set { self[DummyListNavigationEnvironmentKey.self] = newValue }
     }

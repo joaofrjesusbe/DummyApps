@@ -2,7 +2,7 @@ import Foundation
 import AppCore
 import Nuke
 
-public extension Container {
+extension Container {
     var networkMode: Factory<NetworkMode> {
         self { .auto }.singleton
     }
@@ -15,7 +15,7 @@ public extension Container {
             )
         }.singleton
     }
-
+    
     var networkPipeline: Factory<NetworkRequest> {
         self {
             let factory = self.cassettePipelineFactory.resolve()
@@ -28,7 +28,7 @@ public extension Container {
         }
         .singleton
     }
-
+    
     var httpClient: Factory<HttpClientType> {
         self {
             guard let baseURL = URL(string: "https://dummyjson.com") else { fatalError("Bad baseURL") }
@@ -36,7 +36,9 @@ public extension Container {
         }
         .singleton
     }
+}
 
+public extension Container {
     /// High-level loader API used by UI layers.
     var imageLoader: Factory<ImageLoader> {
         self {

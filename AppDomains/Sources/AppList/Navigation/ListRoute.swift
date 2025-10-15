@@ -1,7 +1,7 @@
 import AppGroup
 
 public enum ListRoute: Routable {
-    case detail(_ index: Int)
+    case detail(product: Product)
     
     public var debugDescription: String {
         switch self {

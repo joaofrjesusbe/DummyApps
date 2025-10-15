@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Product
-public struct Product: Codable, Identifiable, Sendable {
+public struct Product: Codable, Identifiable, Hashable, Sendable {
     public let id: Int
     public let title: String
     public let description: String

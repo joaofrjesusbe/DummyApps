@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Dimensions
-public struct Dimensions: Codable, Sendable {
+public struct Dimensions: Codable, Hashable, Sendable {
     public let width: Double
     public let height: Double
     public let depth: Double

@@ -29,17 +29,11 @@ let package = Package(
                 "AppGroup",
                 "AppList"
             ],
-            resources: [
-                .process("Resources")
-            ]
         ),
         .target(
             name: "AppList",
             dependencies: [
                 "AppGroup",
-            ],
-            resources: [
-                .process("Resources")
             ]
         ),
         .testTarget(

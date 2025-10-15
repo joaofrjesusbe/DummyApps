@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Review
-public struct Review: Codable, Sendable {
+public struct Review: Codable, Hashable, Sendable {
     public let rating: Int
     public let comment: String
     public let date: Date

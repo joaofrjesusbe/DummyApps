@@ -1,21 +1,12 @@
-//
-//  DummyJsonApp.swift
-//  DummyJson
-//
-//  Created by Joao Jesus on 14/10/2025.
-//
-
 import SwiftUI
-import CoreData
+import AppList
 
 @main
 struct DummyJsonApp: App {
-    let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ListNavigation()
         }
     }
 }

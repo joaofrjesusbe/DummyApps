@@ -23,9 +23,6 @@ let package = Package(
             name: "AppCore",
             dependencies: [
                 .product(name: "FactoryKit", package: "Factory")
-            ],
-            resources: [
-                .process("Resources")
             ]
         ),
         .testTarget(
@@ -33,9 +30,6 @@ let package = Package(
             dependencies: [
                 "AppCore",
                 "ViewInspector"
-            ],
-            resources: [
-                .process("Resources")
             ]
         ),
     ]

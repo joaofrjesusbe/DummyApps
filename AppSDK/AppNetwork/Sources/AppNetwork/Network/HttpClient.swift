@@ -1,7 +1,7 @@
 import Foundation
 import AppCore
 
-public final class HttpClient: HttpClientType {
+public final class HttpClient: HttpClientType, @unchecked Sendable {
     @Injected(\.logger) private var logger
     private let baseURL: URL
     private let networkRequest: NetworkRequest

@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol HttpClientType {
+public protocol HttpClientType: Sendable {
     func send<T: Decodable>(
         _ request: HttpRequest,
         decode type: T.Type

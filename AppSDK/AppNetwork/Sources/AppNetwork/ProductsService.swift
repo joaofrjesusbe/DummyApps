@@ -1,9 +1,8 @@
 import Foundation
 
-public protocol ProductsService {
+public protocol ProductsService: Sendable {
     
-    // TODO:
-    // Make pagination and if there is failure save the state so we can retry without asking for everything again
-    // But for this timeline will keep it simple due low number of products. This will not scale for huge number of products
-    public func allProducts() async throws -> CatalogResponse {
+    func allProducts() async throws -> CatalogResponse
+    
+    func pageProducts(limit: Int, skip: Int) async throws -> CatalogResponse
 }

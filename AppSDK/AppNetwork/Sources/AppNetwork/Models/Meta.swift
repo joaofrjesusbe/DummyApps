@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Meta
-public struct Meta: Codable, Sendable {
+public struct Meta: Codable, Hashable, Sendable {
     public let createdAt: Date
     public let updatedAt: Date
     public let barcode: String

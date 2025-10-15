@@ -1,7 +1,12 @@
 import Nuke
 import Foundation
 
-public struct ImageLoader {
+public protocol ImageLoadable {
+    
+    func image(for url: URL) async throws -> PlatformImage
+}
+
+public struct ImageLoader: ImageLoadable {
     private let pipeline: ImagePipeline
 
     public init(pipeline: ImagePipeline) {
