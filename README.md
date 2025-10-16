@@ -79,4 +79,5 @@ Contributors:
 - AppDesignSystem only has UI generic components used by AppList.
 - Form is not generic and for scalibility should use more generic approach.
 - NSLocalizedString should be extracted from the views, but for time constraints I didn't extracted.
+- DatePicker should need a rework to be more UI friendly
 
