@@ -24,53 +24,53 @@ class FormViewModel: ObservableObject {
     }
     
     private func setupValidation() {
-        // Combine all field validations to enable/disable submit button
-        Publishers.CombineLatest3(
-            Publishers.CombineLatest4(
-                $nameError,
-                $emailError,
-                $phoneError,
-                $promoError
-            ),
-            $dateError,
-            $formData
-        )
-        .map { firstFour, dateErr, data in
-            let (nameErr, emailErr, phoneErr, promoErr) = firstFour
-            
-            return nameErr == nil &&
-            emailErr == nil &&
-            phoneErr == nil &&
-            promoErr == nil &&
-            dateErr == nil &&
+        // Recompute submit availability when form data changes
+        $formData
+            .sink { [weak self] _ in self?.recomputeSubmitEnabled() }
+            .store(in: &cancellables)
+        // Initial compute
+        recomputeSubmitEnabled()
+    }
+
+    private func recomputeSubmitEnabled() {
+        let data = formData
+        isSubmitEnabled =
+            nameError == nil &&
+            emailError == nil &&
+            phoneError == nil &&
+            promoError == nil &&
+            dateError == nil &&
             !data.name.isEmpty &&
             !data.email.isEmpty &&
             !data.phoneNumber.isEmpty &&
             !data.promoCode.isEmpty &&
             data.deliveryDate != nil &&
             data.classification != nil
-        }
-        .assign(to: &$isSubmitEnabled)
     }
     
     func validateName() {
         nameError = nameValidator.validate(formData.name)
+        recomputeSubmitEnabled()
     }
     
     func validateEmail() {
         emailError = emailValidator.validate(formData.email)
+        recomputeSubmitEnabled()
     }
     
     func validatePhone() {
         phoneError = phoneValidator.validate(formData.phoneNumber)
+        recomputeSubmitEnabled()
     }
     
     func validatePromoCode() {
         promoError = promoValidator.validate(formData.promoCode)
+        recomputeSubmitEnabled()
     }
     
     func validateDate() {
         dateError = dateValidator.validate(formData.deliveryDate)
+        recomputeSubmitEnabled()
     }
     
     func submit() {
