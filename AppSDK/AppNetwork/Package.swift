@@ -24,9 +24,6 @@ let package = Package(
                 "AppCore",
                 "Nuke"
             ],
-            resources: [
-                .copy("Resources/Records")
-            ],
         ),
         .testTarget(
             name: "AppNetworkTests",

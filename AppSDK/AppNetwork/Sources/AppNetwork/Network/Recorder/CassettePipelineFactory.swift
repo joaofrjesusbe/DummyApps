@@ -68,7 +68,7 @@ public final class CassettePipelineFactory {
     }
     
     static private func createCassette() -> HttpDiskCassette {
-        let bundledRoot = Bundle.module.url(forResource: "Records", withExtension: nil)
+        let bundledRoot = Bundle.main.url(forResource: "Records", withExtension: nil)
 
         let cassette = HttpDiskCassette(
             folderName: "Records",

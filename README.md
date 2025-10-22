@@ -4,9 +4,6 @@
 
 [Requirements in Portuguese](InterviewChallenge.pdf) 
 
-Contributors:
-- Me
-
 ## Tech Requirements
 
 - Xcode 16+ (Swift 6 toolchain)
@@ -80,4 +77,4 @@ Contributors:
 - Form is not generic and for scalibility should use more generic approach.
 - NSLocalizedString should be extracted from the views, but for time constraints I didn't extracted.
 - DatePicker should need a rework to be more UI friendly
-
+- For advance search feature, where the number of products is high (> 25k), it's prefer to cache using CoreData + Core Spotlight or even SQLite FTS5.
